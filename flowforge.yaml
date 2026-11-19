@@ -1,0 +1,36 @@
+# Flow Forge CLI - Main Workflow Configuration
+version: "1.4"
+
+project:
+  name: "core-automation-pipeline"
+  environment: "production"
+  strict_mode: true
+
+runtime:
+  node_bridge: true
+  concurrency: 4
+  timeout_ms: 15000
+
+pipelines:
+  - id: "schema-codegen"
+    description: "Transforms YAML/JSON definitions into typed output artifacts"
+    input: "./schemas/**/*.yaml"
+    output: "./dist/generated"
+    steps:
+      - validate_schema
+      - normalize_keys
+      - emit_artifacts
+
+  - id: "docs-sync"
+    description: "Extracts structured metadata for automated technical documentation"
+    input: "./src/**/*.js"
+    output: "./dist/docs"
+    steps:
+      - parse_annotations
+      - render_markdown
+
+plugins:
+  - name: "json-schema-validator"
+    enabled: true
+  - name: "eslint-formatter-hook"
+    enabled: true

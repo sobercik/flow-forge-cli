@@ -1,0 +1,27 @@
+{
+  "name": "flow-forge-node",
+  "version": "1.4.2",
+  "description": "Node.js ESM bridge and task runner integration for Flow Forge CLI",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "scripts": {
+    "forge:run": "flowforge run --config flowforge.yaml",
+    "forge:validate": "flowforge validate --config flowforge.yaml",
+    "start": "node index.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "flow-forge",
+    "cli-wrapper",
+    "automation",
+    "workflow",
+    "structured-data"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
